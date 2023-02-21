@@ -1,28 +1,28 @@
 {
   "scripts": {
-    "start": "snowpack dev",
-    "build": "snowpack build",
+    "start": "vite",
+    "build": "vite build",
     "test": "echo \"This template does not include a test runner by default.\" && exit 1",
     "deploy": "git push && git push --tags && npm publish",
     "format": "prettier --write \"src/**/*.js\"",
     "lint": "prettier --check \"src/**/*.js\""
   },
   "dependencies": {
-    "@babel/preset-env": "^7.20.2",
-    "@glimmer/component": "2.0.0-beta.21",
-    "@glimmer/core": "2.0.0-beta.21",
-    "@glimmer/helper": "2.0.0-beta.21",
-    "@glimmer/modifier": "2.0.0-beta.21",
-    "@glimmer/tracking": "2.0.0-beta.21",
+    "@glimmer/syntax": "^0.84.2",
+    "@glimmerx/compiler": "0.6.8",
+    "@glimmerx/component": "0.6.8",
+    "@glimmerx/core": "0.6.8",
+    "@glimmerx/helper": "0.6.8",
+    "@glimmerx/modifier": "0.6.8",
     "navigo": "^8.0.1"
   },
   "devDependencies": {
     "@babel/core": "^7.12.10",
     "@babel/plugin-proposal-class-properties": "^7.12.1",
     "@babel/plugin-proposal-decorators": "^7.12.1",
-    "@glimmer/babel-preset": "^2.0.0-beta.21",
-    "@snowpack/babel-plugin-package-import": "^1.1.6",
-    "@snowpack/plugin-babel": "^2.1.5",
-    "snowpack": "^2.18.4"
+    "@glimmerx/babel-preset": "^0.6.8",
+    "vite": "^4.1.2",
+    "vite-plugin-babel": "^1.1.3",
+    "vite-plugin-inspect": "^0.7.15"
   }
 }

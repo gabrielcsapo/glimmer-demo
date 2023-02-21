@@ -1,25 +1,15 @@
 import routes from "./routes.js";
 import Navigo from "navigo";
 
-import Component from "@glimmer/component";
+import Component from "@glimmerx/component";
 
 import {
   modifierCapabilities,
-  precompileTemplate,
   setComponentTemplate,
-  templateOnlyComponent,
   setModifierManager,
-} from "@glimmer/core";
+} from "@glimmerx/core";
 
-const LinkTo = setComponentTemplate(
-  precompileTemplate(
-    `
-  <a href={{@route}} data-navigo>{{yield}}</a>
-  `,
-    { strictMode: true }
-  ),
-  templateOnlyComponent()
-);
+const LinkTo = <template><a href={{@route}} data-navigo>{{yield}}</a></template>
 
 class CustomModifier {
   element;
@@ -59,22 +49,13 @@ class NavigationModifier {
 
 setModifierManager((owner) => new NavigationModifier(owner), CustomModifier);
 
-class RouterComponent extends Component {
+class Router extends Component {
   constructor() {
     super(arguments);
-
-    console.log("hi", RouterComponent);
   }
+  <template>
+    <div id="glimmer-router-outlet" {{CustomModifier}}></div>
+  </template>
 }
-
-const Router = setComponentTemplate(
-  precompileTemplate(
-    `
-      <div id="glimmer-router-outlet" {{CustomModifier}}></div>
-   `,
-    { strictMode: true, scope: { CustomModifier } }
-  ),
-  RouterComponent
-);
 
 export { Router, LinkTo };

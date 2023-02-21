@@ -1,15 +1,11 @@
-import Component from "@glimmer/component";
-import { precompileTemplate, setComponentTemplate } from "@glimmer/core";
+import Component from "@glimmerx/component";
 
 import "./App.css";
 
-import { Router, LinkTo } from "./Router.js";
+import { Router, LinkTo } from "./Router.gjs";
 
-class App extends Component {}
-
-setComponentTemplate(
-  precompileTemplate(
-    `
+class App extends Component {
+  <template>
     <html>
       <header>
         <nav>
@@ -24,10 +20,7 @@ setComponentTemplate(
           <Router/>
       </main>
     </html>
-    `,
-    { strictMode: true, scope: { Router, LinkTo } }
-  ),
-  App
-);
+  </template>
+}
 
 export default App;

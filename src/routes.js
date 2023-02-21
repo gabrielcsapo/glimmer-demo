@@ -1,8 +1,8 @@
-import { renderComponent } from "@glimmer/core";
+import { renderComponent } from "@glimmerx/core";
 
-import Home from "./pages/Home.js";
-import About from "./pages/About.js";
-import Contact from "./pages/Contact.js";
+import Home from "./pages/Home.gjs";
+import About from "./pages/About.gjs";
+import Contact from "./pages/Contact.gjs";
 
 export default function (element) {
   return {

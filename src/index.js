@@ -1,5 +1,6 @@
-import { renderComponent } from "@glimmer/core";
-import App from "./App.js";
+import { renderComponent } from "@glimmerx/core";
+
+import App from "./App.gjs";
 import LocaleService from "./services/LocaleService.js";
 
 document.addEventListener(
