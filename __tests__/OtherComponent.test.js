@@ -1,5 +1,5 @@
 import OtherComponent from "../src/OtherComponent.gjs";
-import { render } from "./util";
+import { render, didRender } from "./util";
 
 import { it, expect } from "vitest";
 
@@ -11,6 +11,7 @@ it("should work", async () => {
       <b>Counter Val: </b>
     "
 `);
+  expect(didRender()).toBeTruthy();
 });
 
 it("should work with args", async () => {
@@ -25,4 +26,5 @@ it("should work with args", async () => {
             <b>Counter Val: 10</b>
           "
       `);
+  expect(didRender()).toBeTruthy();
 });
