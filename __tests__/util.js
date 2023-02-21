@@ -3,13 +3,14 @@ import {
   didRender,
 } from "@glimmerx/core";
 
-export async function renderComponent(component) {
+export async function renderComponent(component, renderingOptions = {}) {
   let options;
 
   const div = document.createElement("div");
 
   await glimmerRenderComponent(component, {
     element: div,
+    ...renderingOptions,
   });
 
   return div;

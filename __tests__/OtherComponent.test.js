@@ -12,3 +12,17 @@ it("should work", async () => {
     "
 `);
 });
+
+it("should work with args", async () => {
+  const element = await renderComponent(OtherComponent, {
+    args: {
+      count: 10,
+    },
+  });
+
+  expect(element.innerHTML).toMatchInlineSnapshot(`
+        "
+            <b>Counter Val: 10</b>
+          "
+      `);
+});
