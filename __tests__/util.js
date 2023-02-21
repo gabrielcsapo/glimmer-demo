@@ -1,14 +1,9 @@
-import {
-  renderComponent as glimmerRenderComponent,
-  didRender,
-} from "@glimmerx/core";
+import { renderComponent, didRender } from "@glimmerx/core";
 
-export async function renderComponent(component, renderingOptions = {}) {
-  let options;
-
+export async function render(component, renderingOptions = {}) {
   const div = document.createElement("div");
 
-  await glimmerRenderComponent(component, {
+  await renderComponent(component, {
     element: div,
     ...renderingOptions,
   });

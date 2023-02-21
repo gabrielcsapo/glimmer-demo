@@ -1,10 +1,10 @@
 import OtherComponent from "../src/OtherComponent.gjs";
-import { renderComponent } from "./util";
+import { render } from "./util";
 
 import { it, expect } from "vitest";
 
 it("should work", async () => {
-  const element = await renderComponent(OtherComponent);
+  const element = await render(OtherComponent);
 
   expect(element.innerHTML).toMatchInlineSnapshot(`
   "
@@ -14,7 +14,7 @@ it("should work", async () => {
 });
 
 it("should work with args", async () => {
-  const element = await renderComponent(OtherComponent, {
+  const element = await render(OtherComponent, {
     args: {
       count: 10,
     },
