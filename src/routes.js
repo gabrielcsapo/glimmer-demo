@@ -1,9 +1,8 @@
 import { renderComponent } from "@glimmerx/core";
 
-import Home from "./pages/Home.gjs";
-import Contact from "./pages/Contact.gjs";
-
 let AboutRoute = null;
+let ContactRoute = null;
+let HomeRoute = null;
 
 export default function (element) {
   return [
@@ -15,7 +14,11 @@ export default function (element) {
       },
       hooks: {
         before: (done) => {
-          console.log(`before about`);
+          if (AboutRoute) {
+            done();
+            return;
+          }
+
           return import("./pages/About.gjs").then((module) => {
             AboutRoute = module.default;
             done();
@@ -27,7 +30,20 @@ export default function (element) {
       path: "contact",
       handler: () => {
         element.innerHTML = "";
-        renderComponent(Contact, element);
+        renderComponent(ContactRoute, element);
+      },
+      hooks: {
+        before: (done) => {
+          if (ContactRoute) {
+            done();
+            return;
+          }
+
+          return import("./pages/Contact.gjs").then((module) => {
+            ContactRoute = module.default;
+            done();
+          });
+        },
       },
     },
     {
@@ -35,7 +51,20 @@ export default function (element) {
       handler: () => {
         console.log("hi");
         element.innerHTML = "";
-        renderComponent(Home, element);
+        renderComponent(HomeRoute, element);
+      },
+      hooks: {
+        before: (done) => {
+          if (HomeRoute) {
+            done();
+            return;
+          }
+
+          return import("./pages/Home.gjs").then((module) => {
+            HomeRoute = module.default;
+            done();
+          });
+        },
       },
     },
   ];
