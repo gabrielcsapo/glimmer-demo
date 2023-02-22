@@ -1,0 +1,6 @@
+{
+  "compilerOptions": {},
+  "glint": {
+    "environment": "glimmerx"
+  }
+}

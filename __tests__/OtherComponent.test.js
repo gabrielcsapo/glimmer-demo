@@ -1,16 +1,13 @@
 import OtherComponent from "../src/OtherComponent.gjs";
 import { render, didRender } from "./util";
 
+import { hbs } from "@glimmerx/component";
 import { it, expect } from "vitest";
 
 it("should work", async () => {
   const element = await render(OtherComponent);
 
-  expect(element.innerHTML).toMatchInlineSnapshot(`
-  "
-      <b>Counter Val: </b>
-    "
-`);
+  expect(element.innerHTML).toMatchSnapshot();
   expect(didRender()).toBeTruthy();
 });
 
@@ -21,10 +18,26 @@ it("should work with args", async () => {
     },
   });
 
-  expect(element.innerHTML).toMatchInlineSnapshot(`
-        "
-            <b>Counter Val: 10</b>
-          "
-      `);
+  expect(element.innerHTML).toMatchSnapshot();
+  expect(didRender()).toBeTruthy();
+});
+
+it("should compile template tags", async () => {
+  const element = await render(
+    <template>
+      <OtherComponent @count=10 />
+    </template>
+  );
+  console.log(element.innerHTML);
+  expect(element.innerHTML).toMatchSnapshot();
+  expect(didRender()).toBeTruthy();
+});
+
+it("should compile hbs backtick", async () => {
+  const element = await render(hbs`
+    <OtherComponent @count=10 />
+  `);
+  console.log(element.innerHTML);
+  expect(element.innerHTML).toMatchSnapshot();
   expect(didRender()).toBeTruthy();
 });

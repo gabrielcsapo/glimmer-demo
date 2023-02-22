@@ -30,30 +30,24 @@ const TEMPLATE_LITERAL_CONFIG = {
   includeTemplateTokens: true,
 };
 
-const fileRegex = /\.(gjs)$/;
-
 export default function glimmerPlugin() {
   return {
     name: "glimmer-plugin",
+    enforce: "pre",
     load(id) {
-      if (id.match(/\.(js|ts)$/)) {
+      console.log(id, id.match(/\.(gjs|gts|js|ts)$/));
+      if (id.match(/\.(gjs|gts|js|ts)$/)) {
+        console.log("parsing", id);
         const source = readFileSync(id, "utf8");
 
-        let { output } = preprocessEmbeddedTemplates(
-          source,
-          Object.assign({ relativePath: id }, TEMPLATE_LITERAL_CONFIG)
-        );
-
-        return transform(output, {
-          filename: id,
-          presets: [[glimmerXPreset, { __loadPlugins: true, precompile }]],
-        });
-      } else if (id.match(/\.(gjs|gts)$/)) {
-        const source = readFileSync(id, "utf8");
-
-        let { output } = preprocessEmbeddedTemplates(
+        let { output: outputTemplate } = preprocessEmbeddedTemplates(
           source,
           Object.assign({ relativePath: id }, TEMPLATE_TAG_CONFIG)
+        );
+
+        let { output } = preprocessEmbeddedTemplates(
+          outputTemplate,
+          Object.assign({ relativePath: id }, TEMPLATE_LITERAL_CONFIG)
         );
 
         return transform(output, {

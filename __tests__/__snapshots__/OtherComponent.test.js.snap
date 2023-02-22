@@ -1,0 +1,29 @@
+// Vitest Snapshot v1
+
+exports[`should compile hbs backtick 1`] = `
+"
+    
+    <b>Counter Val: 10</b>
+  
+  "
+`;
+
+exports[`should compile template tags 1`] = `
+"
+      
+    <b>Counter Val: 10</b>
+  
+    "
+`;
+
+exports[`should work 1`] = `
+"
+    <b>Counter Val: </b>
+  "
+`;
+
+exports[`should work with args 1`] = `
+"
+    <b>Counter Val: 10</b>
+  "
+`;
