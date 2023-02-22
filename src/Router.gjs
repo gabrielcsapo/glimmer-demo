@@ -32,7 +32,9 @@ class NavigationModifier {
 
     const navigoRoutes = routes(element);
 
-    this.router.on(navigoRoutes).resolve();
+    navigoRoutes.forEach(r => {
+      this.router.on(r.path, r.handler, r.hooks).resolve();
+    });
 
     const { positional, named } = args;
     instance.didInsertElement(positional, named);

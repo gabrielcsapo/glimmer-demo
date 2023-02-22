@@ -1,23 +1,71 @@
 import { renderComponent } from "@glimmerx/core";
 
-import Home from "./pages/Home.gjs";
-import About from "./pages/About.gjs";
-import Contact from "./pages/Contact.gjs";
+let AboutRoute = null;
+let ContactRoute = null;
+let HomeRoute = null;
 
 export default function (element) {
-  return {
-    about: () => {
-      element.innerHTML = "";
-      renderComponent(About, element);
+  return [
+    {
+      path: "about",
+      handler: () => {
+        element.innerHTML = "";
+        renderComponent(AboutRoute, element);
+      },
+      hooks: {
+        before: (done) => {
+          if (AboutRoute) {
+            done();
+            return;
+          }
+
+          return import("./pages/About.gjs").then((module) => {
+            AboutRoute = module.default;
+            done();
+          });
+        },
+      },
     },
-    contact: () => {
-      element.innerHTML = "";
-      renderComponent(Contact, element);
+    {
+      path: "contact",
+      handler: () => {
+        element.innerHTML = "";
+        renderComponent(ContactRoute, element);
+      },
+      hooks: {
+        before: (done) => {
+          if (ContactRoute) {
+            done();
+            return;
+          }
+
+          return import("./pages/Contact.gjs").then((module) => {
+            ContactRoute = module.default;
+            done();
+          });
+        },
+      },
     },
-    "*": () => {
-      console.log("hi");
-      element.innerHTML = "";
-      renderComponent(Home, element);
+    {
+      path: "*",
+      handler: () => {
+        console.log("hi");
+        element.innerHTML = "";
+        renderComponent(HomeRoute, element);
+      },
+      hooks: {
+        before: (done) => {
+          if (HomeRoute) {
+            done();
+            return;
+          }
+
+          return import("./pages/Home.gjs").then((module) => {
+            HomeRoute = module.default;
+            done();
+          });
+        },
+      },
     },
-  };
+  ];
 }
